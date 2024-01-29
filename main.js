@@ -51,6 +51,7 @@ function renderMovies(movie)
     `
     document.querySelector("#movies").innerHTML = '';
     document.querySelector("#movies").appendChild(movieDiv);
+
 }
 
 function renderNav(data)
@@ -71,7 +72,7 @@ function navigator(id)
 }
 
 function buyTicket(id){
-    
+    console.log((id));
     if(available > 0){
         available = available - 1;
         ticket_sold = ticket_sold + 1;
@@ -91,7 +92,7 @@ function buyTicket(id){
 function updateServer(id,ticket_sold)
 {
     // console.log(id,ticket_sold)
-    console.log(movieObj)
+    // console.log(movieObj)
     fetch(`${url}/${id}`,{
         method: "PATCH",
         headers: {
@@ -103,14 +104,14 @@ function updateServer(id,ticket_sold)
         
     })
     .then(res => res.json())
-        .then(movie => {
-            renderMovies(movie);
-        })
+    .then(movie => {
+        renderMovies(movie);
+    })
 }
 
 function deleteFilm(id)
 {
-    console.log(id);
+    //console.log(id);
     let msg = "Are you sure you want to delete";
     if(confirm(msg) == true){
         fetch(`${url}/${id}`,{
